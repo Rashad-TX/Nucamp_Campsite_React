@@ -18,6 +18,7 @@ import { Loading } from "./LoadingComponent";
 import {
   baseUrl
 } from '../shared/baseUrl';
+import{FadeTransform, Fade, Stagger} from "react-animation-components"
 
 const maxLength = (len) => (val) => !val || val.length <= len;
 const minLength = (len) => (val) => val && val.length >= len;
@@ -118,18 +119,18 @@ class CommentForm extends React.Component {
 function RenderCampsite({ campsite }) {
   return (
     <div className="col-md-5 m-1">
+      <FadeTransform 
+      in 
+      transformProps={{ 
+        exitTransform: "scale(0.5) translateY(-50%)"
+        }}>
       <Card>
-               <CardImg top src = {
-                 baseUrl + campsite.image
-               }
-               alt = {
-                 campsite.name
-               }
-               />
+               <CardImg top src = {baseUrl + campsite.image} alt = {campsite.name} />
         <CardBody>
           <CardText>{campsite.description}</CardText>
         </CardBody>
       </Card>
+          </FadeTransform>
     </div>
   );
 }
@@ -139,9 +140,13 @@ function RenderComments({ comments,postComment, campsiteId }) {
     return (
       <div className="col-md-5 m-1">
         <h4>Comments:</h4>
+        <Stagger in>
         {comments.map((comment) => {
           return (
-            <div key={comment.id} style={{ marginBottom: "20px" }}>
+            < Fade in key = {
+              comment.id
+            } >
+            <div  style={{ marginBottom: "20px" }}>
               <h4>
                 {comment.text}{" "}
                 {new Intl.DateTimeFormat("en-US", {
@@ -153,8 +158,10 @@ function RenderComments({ comments,postComment, campsiteId }) {
               <div> {comment.author} </div>
               <br></br>
             </div>
+            </Fade>
           );
         })}
+        </Stagger>
         <CommentForm postComment={postComment} campsiteId={campsiteId} />
       </div>
     );

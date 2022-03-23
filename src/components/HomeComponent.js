@@ -11,6 +11,7 @@ import {
 import {
     baseUrl
 } from '../shared/baseUrl';
+import {FadeTransfrom} from "react-animation-components"
 
 
 function RenderCard({item,isLoading,errMess}) {
@@ -19,6 +20,11 @@ function RenderCard({item,isLoading,errMess}) {
         return <h4> {errMess} </h4>;
     }
  return(
+       < FadeTransfrom in transformProps = {
+           {
+               exitTransform: "scale(0.5) translateY(50%)"
+           }
+       } > 
         <Card >
         <CardImg src = {
             baseUrl + item.image
@@ -32,6 +38,8 @@ function RenderCard({item,isLoading,errMess}) {
         } </CardTitle> <CardBody > {
             item.description
         } </CardBody> </CardBody> </Card> 
+   </FadeTransfrom>
+
     );
 }
 

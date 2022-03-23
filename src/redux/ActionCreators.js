@@ -79,7 +79,7 @@ return fetch(baseUrl + 'comments',{
  .then(response => response.json())
  .then(response => dispatch(addComment(response)))
  .catch(error => {
-     console.log('post comment'error.message);
+     console.log('post comment', error.message);
      alert('Your comment could not be posted\nError:' +error.message);
  });
 };

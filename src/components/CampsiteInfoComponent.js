@@ -119,11 +119,15 @@ class CommentForm extends React.Component {
 function RenderCampsite({ campsite }) {
   return (
     <div className="col-md-5 m-1">
+
       <FadeTransform 
       in 
       transformProps={{ 
-        exitTransform: "scale(0.5) translateY(-50%)"
+       
+        exitTransform: "scale(100) translateY(100%)"
         }}>
+
+
       <Card>
                <CardImg top src = {baseUrl + campsite.image} alt = {campsite.name} />
         <CardBody>
